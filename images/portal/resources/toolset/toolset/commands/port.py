@@ -37,7 +37,7 @@ def go():
         def customize(self, parser):
 
             parser.add_argument('port', type=int, nargs=1, help='TCP port to lookup')
-            parser.add_argument('clusters', type=str, nargs='*', default='*', help='1+ clusters (can be a glob pattern, e.g foo*)')
+            parser.add_argument('clusters', type=str, nargs='+', help='1+ clusters (can be a glob pattern, e.g foo*)')
             parser.add_argument('-j', '--json', action='store_true', help='switch for json output')
 
         def body(self, args, proxy):
@@ -67,7 +67,7 @@ def go():
                         logger.info('  '.join((val.ljust(width) for val, width in zip(row, widths))))
 
             if args.json:
-                
+
                 logger.info(json.dumps(outs))
 
     return _Tool()

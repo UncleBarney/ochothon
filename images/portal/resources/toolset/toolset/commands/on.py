@@ -29,16 +29,15 @@ def go():
 
         help = \
             '''
-                Switches one or more containers off (their sub-process being gracefully shutdown while the pod keeps
-                running). Individual containers can also be cherry-picked by specifying their sequence index and using
-                -i.
+                Switches one or more containers on. Individual containers can also be cherry-picked by specifying
+                their sequence index and using -i.
             '''
 
         tag = 'on'
 
         def customize(self, parser):
 
-            parser.add_argument('clusters', type=str, nargs='*', default='*', help='1+ clusters (can be a glob pattern, e.g foo*)')
+            parser.add_argument('clusters', type=str, nargs='+', help='1+ clusters (can be a glob pattern, e.g foo*)')
             parser.add_argument('-i', '--indices', action='store', dest='indices', type=int, nargs='+', help='1+ indices')
 
         def body(self, args, proxy):

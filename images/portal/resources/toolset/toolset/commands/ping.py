@@ -43,7 +43,7 @@ def go():
         def customize(self, parser):
 
             parser.add_argument('yaml', nargs=1, help='YAML file')
-            parser.add_argument('clusters', type=str, nargs='*', default='*', help='1+ clusters (can be a glob pattern, e.g foo*)')
+            parser.add_argument('clusters', type=str, nargs='+', help='1+ clusters (can be a glob pattern, e.g foo*)')
             parser.add_argument('-j', action='store_true', dest='json', help='json output')
 
         def body(self, args, proxy):

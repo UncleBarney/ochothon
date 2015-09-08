@@ -37,7 +37,7 @@ def go():
 
         def customize(self, parser):
 
-            parser.add_argument('clusters', type=str, nargs='*', default='*', help='1+ clusters (can be a glob pattern, e.g foo*).')
+            parser.add_argument('clusters', type=str, nargs='+', help='1+ clusters (can be a glob pattern, e.g foo*).')
             parser.add_argument('-j', '--json', action='store_true', help='switch for json output')
 
         def body(self, args, proxy):
@@ -55,7 +55,7 @@ def go():
                     return len(replies), {key: hints['metrics'] for key, (index, hints, code) in replies.items() if code == 200 and 'metrics' in hints}
 
                 total, js = run(proxy, _query)
-                
+
                 outs.update(js)
 
                 #
@@ -69,7 +69,7 @@ def go():
                     widths = [max(map(len, col)) for col in zip(*rows)]
                     for row in rows:
                         logger.info('  '.join((val.ljust(width) for val, width in zip(row, widths))))
-            
+
             if args.json:
 
                 logger.info(json.dumps(outs))
